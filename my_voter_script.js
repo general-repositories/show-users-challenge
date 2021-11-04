@@ -6,38 +6,51 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		event.preventDefault();
 
 		// Get the current stuffs from the things
-		const action = 'my_user_vote'
 		const post_id = voteLink.getAttribute('data-post_id');
 		const nonce = voteLink.getAttribute('data-nonce');
-		
-		// Encode the damn thangs
-		const data = encodeURI(`action=my_user_vote&post_id=${post_id}&nonce=${nonce}`)
 
-		fetch(myAjax.ajaxurl, {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json, text/javascript, */*; q=0.01',
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-				'X-Requested-With': 'XMLHttpRequest'
-			},
-			body: data
+		body = {
+			'action': 'my_user_vote',
+			'post_id': voteLink.getAttribute('data-post_id'),
+			'nonce': voteLink.getAttribute('data-nonce')
+		};
+
+		fetchAjax(myAjax.ajaxurl, body)
+		.then(object=>{
+			console.log(object);
+			document.getElementById('vote_counter').innerHTML = object.vote_count;
 		})
-		.then(res=>res.json())
-		.then(data=>{
-			console.log(data);
-			document.getElementById('vote_counter').innerHTML = data.vote_count;
-		});
 	});
 });
 
+// Dynamic AJAX Fetch Function lolies
 async function fetchAjax(url, body){
-	body = {
-		'action': 'my_user_vote',
-		'post_id': voteLink.getAttribute('data-post_id'),
-		'nonce': voteLink.getAttribute('data-nonce')
-	};
+	let bodyString = ``;
+	let overOne = 1;
+	
+	for (const key in body) {
+		overOne === 1 ? 
+			bodyString = bodyString + `${key}=${body[key]}` :
+			bodyString = bodyString + `&${key}=${body[key]}`;
 
-	body.forEach(element => {
-			
+		overOne++;
+	}
+	
+	const encodedBody = encodeURI(bodyString);
+
+	const response = fetch(myAjax.ajaxurl, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json, text/javascript, */*; q=0.01',
+			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+			'X-Requested-With': 'XMLHttpRequest'
+		},
+		body: encodedBody
 	});
+
+	const data = (await response).json();
+
+	const object = await data;
+
+	return object;
 }
