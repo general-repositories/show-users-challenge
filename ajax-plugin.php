@@ -10,7 +10,7 @@
 
 function my_user_vote() {
 	
-	if ( !wp_verify_nonce($_REQUEST['nonce'], "my_user_vote_nonce")) {
+	if (!wp_verify_nonce($_REQUEST['nonce'], "my_user_vote_nonce")) {
 		exit("No naughty business please");
 	}
 
