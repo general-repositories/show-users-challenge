@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 	});
 });
 
+
 // Dynamic AJAX Fetch Function lolies
 async function fetchAjax(url, body){
 	let bodyString = ``;
