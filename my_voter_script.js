@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		ajaxReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 		// Encode the damn thangs
-		const data = encodeURI(`action=my_user_vote&post_id=${post_id}&nonce=${nonce}`)
+		const data = encodeURI(`action=my_user_vote&post_id=${post_id}&nonce=${nonce}`);
 
 		// Send the request With the encoded form body from the previous line
 		ajaxReq.send(data);
