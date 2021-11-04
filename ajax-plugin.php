@@ -1,7 +1,7 @@
 <?
 
 /*
-	Plugin Name: sandbox
+	Plugin Name: ajax-plugin
 	Description: A truly amazing plugin.
 	Version: 1.0
 	Author: tinker_dot_bin
