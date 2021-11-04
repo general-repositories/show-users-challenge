@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		.then(object=>{
 			console.log(object);
 			document.getElementById('vote_counter').innerHTML = object.vote_count;
-		})
+		});
 	});
 });
 
@@ -29,7 +29,7 @@ async function fetchAjax(url, body){
 	let bodyString = ``;
 	let overOne = 1;
 	
-	for (const key in body) {
+	for(const key in body){
 		overOne === 1 ? 
 			bodyString = bodyString + `${key}=${body[key]}` :
 			bodyString = bodyString + `&${key}=${body[key]}`;
