@@ -53,7 +53,7 @@ add_action("wp_ajax_nopriv_my_user_vote", "my_must_login");
 
 
 function my_script_enqueuer() {
-	wp_register_script("my_voter_script", WP_PLUGIN_URL.'/sandbox/my_voter_script.js', array('jquery'));
+	wp_register_script("my_voter_script", WP_PLUGIN_URL.'/javascript-wordpress-ajax-call/my_voter_script.js', array('jquery'));
 	
 	// This seems like the key to the communication between ajax and jquery
 	wp_localize_script('my_voter_script', 'myAjax', array('ajaxurl' => admin_url('admin-ajax.php'))
