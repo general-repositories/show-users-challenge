@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		event.preventDefault();
 
 		// Get the current stuffs from the things
+		const action = 'my_user_vote'
 		const post_id = voteLink.getAttribute('data-post_id');
 		const nonce = voteLink.getAttribute('data-nonce');
 		
@@ -28,3 +29,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		});
 	});
 });
+
+async function fetchAjax(url, body){
+	body = {
+		'action': 'my_user_vote',
+		'post_id': voteLink.getAttribute('data-post_id'),
+		'nonce': voteLink.getAttribute('data-nonce')
+	};
+
+	body.forEach(element => {
+			
+	});
+}
