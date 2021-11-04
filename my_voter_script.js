@@ -9,13 +9,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 		const post_id = voteLink.getAttribute('data-post_id');
 		const nonce = voteLink.getAttribute('data-nonce');
 
-		body = {
+		fetchAjax(myAjax.ajaxurl, {
 			'action': 'my_user_vote',
 			'post_id': voteLink.getAttribute('data-post_id'),
 			'nonce': voteLink.getAttribute('data-nonce')
-		};
-
-		fetchAjax(myAjax.ajaxurl, body)
+		})
 		.then(object=>{
 			console.log(object);
 			document.getElementById('vote_counter').innerHTML = object.vote_count;
