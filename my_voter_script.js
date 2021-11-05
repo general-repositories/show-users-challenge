@@ -36,7 +36,7 @@ async function fetchAjax(url, body){
 	
 	const encodedBody = encodeURI(bodyString);
 
-	const response = fetch(myAjax.ajaxurl, {
+	const response = fetch(url, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json, text/javascript, */*; q=0.01',
