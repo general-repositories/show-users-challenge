@@ -13,7 +13,6 @@ function my_user_vote() {
 	if (!wp_verify_nonce($_REQUEST['nonce'], "my_user_vote_nonce")) {
 		exit("No naughty business please");
 	}
-
 	
 	$vote_count = get_post_meta($_REQUEST["post_id"], "votes", true);
 	$vote_count = ($vote_count == ’) ? 0 : $vote_count;
