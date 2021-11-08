@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 			'nonce': voteLink.getAttribute('data-nonce')
 		}).then(object=>{
 			console.log(object);
-			document.getElementById('vote_counter').innerHTML = object.vote_count;
+			object.type === 'success' ?
+				document.getElementById('vote_counter').innerHTML = object.vote_count :
+				document.getElementById('vote_counter').innerHTML = "Please log in to vote";
 		});
 	});
 });

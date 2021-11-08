@@ -44,7 +44,9 @@ function my_user_vote() {
 add_action("wp_ajax_my_user_vote", "my_user_vote");
 
 function my_must_login() {
-	echo "You must log in to vote";
+	$result['type'] = "error";
+	$result = json_encode($result);
+	echo $result;
 	die();
 }
 
