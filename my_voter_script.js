@@ -37,13 +37,12 @@ async function fetchAjax(url, body){
 	}
 	
 	const encodedBody = encodeURI(bodyString);
-
+	
 	const response = fetch(url, {
 		method: 'POST',
 		headers: {
-			'Accept': 'application/json, text/javascript, */*; q=0.01',
+			'Accept': 'application/json',
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			'X-Requested-With': 'XMLHttpRequest'
 		},
 		body: encodedBody
 	});

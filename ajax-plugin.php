@@ -28,8 +28,8 @@ function my_user_vote(){
 		$result['type'] = "success";
 		$result['vote_count'] = $new_vote_count;
 	}
-	
-	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+
+	if(strtolower($_SERVER['HTTP_ACCEPT'] == 'application/json')){
 		$result['server'] = $_SERVER;
 		$result['request'] = $_REQUEST;
 		$result = json_encode($result);
