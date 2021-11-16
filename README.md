@@ -3,5 +3,3 @@
 # In the fetch branch, a fetch version of the same request
 
 # In the fetch-ajax-function branch, a dynamic function so you can reuse this ajax call without re-writing the required headers
-
-quick push test sorry
