@@ -12,11 +12,14 @@ function showUsers(){
 			'nonce': div.getAttribute('data-nonce')
 		})
 		.then(object=>{
-			for (const key in object){
-				const element = document.createElement('li');
-				element.innerText = object[key];
-				userList.appendChild(element);
+			if(object.type != 'must login'){
+				for (const key in object){
+					const element = document.createElement('li');
+					element.innerText = object[key];
+					userList.appendChild(element);
+				}
 			}
+			else alert('you must be logged in to see the list');
 		});
 	}
 }
