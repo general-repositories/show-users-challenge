@@ -38,7 +38,7 @@ function show_authors(){
 add_action("wp_ajax_show_authors", "show_authors");
 
 function my_must_login(){
-	$result['type'] = "error";
+	$result['type'] = "you must be logged in to see the list";
 	$result = json_encode($result);
 	echo $result;
 	die();
