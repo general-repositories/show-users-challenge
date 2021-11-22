@@ -71,7 +71,6 @@ function render_frontend(){
 	<div 
 		id="showUsers"
 		data-nonce="<?php echo $nonce;?>"
-		data-post_id="<?php echo $post->ID;?>"	
 	>
 		<button
 			onclick="showUsers()"

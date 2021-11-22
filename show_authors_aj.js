@@ -8,7 +8,6 @@ function showUsers(){
 		isRan = true;
 		fetchAjax(myAjax.ajaxurl, {
 			'action': 'show_authors',
-			'post_id': div.getAttribute('data-post_id'),
 			'nonce': div.getAttribute('data-nonce')
 		})
 		.then(object=>{
