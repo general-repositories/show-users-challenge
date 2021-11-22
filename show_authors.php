@@ -17,9 +17,8 @@ function show_authors(){
 	$users = get_users();
 	$user_number = 0;
 
-	foreach ($users as $key){
-		$meta_data = get_user_meta($key->ID);
-		$result['user'.$user_number] = $meta_data['nickname'];
+	foreach ($users as $user){
+		$result['user'.$user_number] = $user->display_name;
 		$user_number++;
 	}
 
@@ -60,7 +59,7 @@ function my_script_enqueuer(){
 add_action('init', 'my_script_enqueuer');
 
 function show_authors_styles(){
-	wp_enqueue_style('styles',  plugin_dir_url(__FILE__)."/show_authors.css");
+	wp_enqueue_style('styles', plugin_dir_url(__FILE__)."/show_authors.css");
 }
 
 add_action('wp_enqueue_scripts', 'show_authors_styles');
