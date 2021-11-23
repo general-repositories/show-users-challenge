@@ -21,14 +21,9 @@ function show_authors(){
 		$result['user'.$user_number] = $user->display_name;
 		$user_number++;
 	}
-
-	if(strtolower($_SERVER['HTTP_ACCEPT'] == 'application/json')){
-		$result = json_encode($result);
-		echo $result;
-	}
-	else{
-		header("Location: ".$_SERVER["HTTP_REFERER"]);
-	}
+	
+	$result = json_encode($result);
+	echo $result;
 	
 	die();
 }

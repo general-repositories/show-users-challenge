@@ -9,8 +9,7 @@ function showUsers(){
 		fetch(myAjax.ajaxurl, {
 			method: 'POST',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 			},
 			body: `action=show_authors&nonce=${div.getAttribute('data-nonce')}`
 		})
