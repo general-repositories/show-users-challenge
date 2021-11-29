@@ -13,19 +13,34 @@ function show_authors(){
 	if(!wp_verify_nonce($_REQUEST['nonce'], "show_authors_nonce")){
 		exit("No naughty business please");
 	}
-	
-	$users = get_users();
-	$user_number = 0;
 
-	foreach ($users as $user){
-		$result['user'.$user_number] = $user->display_name;
-		$user_number++;
+	// Store users clicks, click times, and page it was clicked on
+
+	$user_meta = get_user_meta($_REQUEST['user'], "clicks", true);
+	
+	$entries = ($user_meta == '') ? 0 : count($user_meta);
+	
+	if($entries == 0){
+		$first_click[0] = array(
+			'click_number'=>1,
+			'click_time'=>$_REQUEST['time'],
+			'page'=>$_REQUEST['post_id']
+		);
+		update_user_meta($_REQUEST['user'], "clicks", $first_click);
+		$result = $first_click;
 	}
-	
-	$result = json_encode($result);
-	echo $result;
-	
-	die();
+	elseif($entries > 0){
+		$clicks = $entries + 1;
+		$user_meta[$entries] = array(
+			'click_number'=> $clicks,
+			'click_time'=>$_REQUEST['time'],
+			'page'=>$_REQUEST['post_id']
+		);
+		update_user_meta($_REQUEST['user'], "clicks", $user_meta);
+		$result = $user_meta;
+	}
+
+	wp_send_json($result);
 }
 
 // This guy is hooking show_authors into the admin-ajax file
@@ -60,12 +75,16 @@ function show_authors_styles(){
 add_action('wp_enqueue_scripts', 'show_authors_styles');
 
 function render_frontend(){
-	$nonce = wp_create_nonce("show_authors_nonce");
+	// $nonce = wp_create_nonce("show_authors_nonce");
+	// $post_id = $post->ID;
+	// $user = 
 	?>
 
 	<div 
 		id="showUsers"
-		data-nonce="<?php echo $nonce;?>"
+		data-nonce="<?php echo wp_create_nonce("show_authors_nonce");?>"
+		post-id="<?php echo get_the_ID();?>"
+		user="<?php echo get_current_user_id();?>"
 	>
 		<button
 			onclick="showUsers()"
@@ -78,4 +97,4 @@ function render_frontend(){
 	<?php
 }
 
-add_shortcode('show_authors' , 'render_frontend');
+add_shortcode('show_authors', 'render_frontend');
