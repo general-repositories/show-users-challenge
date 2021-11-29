@@ -32,7 +32,7 @@ function show_authors(){
 	elseif($entries > 0){
 		$clicks = $entries + 1;
 		$user_meta[$entries] = array(
-			'click_number'=> $clicks,
+			'click_number'=>$clicks,
 			'click_time'=>$_REQUEST['time'],
 			'page'=>$_REQUEST['post_id']
 		);
