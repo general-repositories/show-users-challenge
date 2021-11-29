@@ -75,25 +75,21 @@ function show_authors_styles(){
 add_action('wp_enqueue_scripts', 'show_authors_styles');
 
 function render_frontend(){
-	// $nonce = wp_create_nonce("show_authors_nonce");
-	// $post_id = $post->ID;
-	// $user = 
 	?>
+		<div 
+			id="showUsers"
+			data-nonce="<?php echo wp_create_nonce("show_authors_nonce");?>"
+			post-id="<?php echo get_the_ID();?>"
+			user="<?php echo get_current_user_id();?>"
+		>
+			<button
+				onclick="showUsers()"
+			>show users</button>
 
-	<div 
-		id="showUsers"
-		data-nonce="<?php echo wp_create_nonce("show_authors_nonce");?>"
-		post-id="<?php echo get_the_ID();?>"
-		user="<?php echo get_current_user_id();?>"
-	>
-		<button
-			onclick="showUsers()"
-		>show users</button>
+			<ul id="userList">
 
-		<ul id="userList">
-
-		</ul>
-	</div>
+			</ul>
+		</div>
 	<?php
 }
 
