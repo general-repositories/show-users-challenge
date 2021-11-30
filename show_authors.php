@@ -80,7 +80,7 @@ add_action('wp_enqueue_scripts', 'show_authors_styles');
 
 function render_frontend(){
 	?>
-		<div 
+		<div
 			id="showUsers"
 			data-nonce="<?php echo wp_create_nonce("show_authors_nonce");?>"
 			post-id="<?php echo get_the_ID();?>"

@@ -5,7 +5,6 @@ function showUsers(){
 	const div = document.getElementById('showUsers');
 	const today = new Date();
 	const dateString = `${today.getHours()}.${today.getMinutes()}.${today.getSeconds()}`;
-	console.log(dateString);
 
 	fetch(myAjax.ajaxurl, {
 		method: 'POST',
@@ -19,7 +18,7 @@ function showUsers(){
 		if(array.type != 'must login'){
 			if(!isRan){
 				isRan = true;
-				for (const key in array){
+				for(const key in array){
 					const element = document.createElement('li');
 					element.innerText = `Clicked ${array[key].click_number} times, click at ${array[key].click_time}`;
 					userList.appendChild(element);
