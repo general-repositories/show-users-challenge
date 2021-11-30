@@ -9,26 +9,28 @@
 */
 
 function show_authors(){
-	
+
+	// First we're gonna make sure our nonce is good
 	if(!wp_verify_nonce($_REQUEST['nonce'], "show_authors_nonce")){
 		exit("No naughty business please");
 	}
 
-	// Store users clicks, click times, and page it was clicked on
-
+	// Let's get all the data already in the "clicks" meta key
 	$user_meta = get_user_meta($_REQUEST['user'], "clicks", true);
-	
+	// See if there's anything in it. if there isn't just set entries to 0
 	$entries = ($user_meta == '') ? 0 : count($user_meta);
 	
+	// If this is the first entry let's add the first array.
 	if($entries == 0){
 		$first_click[0] = array(
 			'click_number'=>1,
 			'click_time'=>$_REQUEST['time'],
 			'page'=>$_REQUEST['post_id']
 		);
+		// Send the new array to the meta key for this user
 		update_user_meta($_REQUEST['user'], "clicks", $first_click);
 		$result = $first_click;
-	}
+	} // Add new array entry for every click after the first one.
 	elseif($entries > 0){
 		$clicks = $entries + 1;
 		$user_meta[$entries] = array(
@@ -36,10 +38,12 @@ function show_authors(){
 			'click_time'=>$_REQUEST['time'],
 			'page'=>$_REQUEST['post_id']
 		);
+		// Send the new array to the meta key for this user
 		update_user_meta($_REQUEST['user'], "clicks", $user_meta);
 		$result = $user_meta;
 	}
 
+	// Send the result back to our js implementation
 	wp_send_json($result);
 }
 
